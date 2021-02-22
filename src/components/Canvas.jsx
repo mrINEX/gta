@@ -1,5 +1,6 @@
 import React from 'react';
 import Hero from './Hero';
+import Ground from './Ground';
 
 const Canvas = () => {
   const style = {
@@ -10,6 +11,7 @@ const Canvas = () => {
   return (
     <svg id="canvas" style={style} viewBox={viewBox}>
       <Hero />
+      <Ground />
     </svg>
   );
 };
