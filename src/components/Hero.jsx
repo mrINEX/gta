@@ -6,8 +6,7 @@ const Hero = () => {
     const [positionY, setPositionY] = useState(82);
     const [isJump, setIsJump] = useState(false);
 
-    const [positionPistol, setPistol] = useState(0);
-    const [positionLaser, setLaser] = useState(80);
+    const [directionGun, setDirectionGun] = useState(0);
 
     const fromAbove = () => {
       for (let i = 0; i < 20; i += 1) {
@@ -39,12 +38,10 @@ const Hero = () => {
         setIsJump(true);
       }
       if (e.which === 38 || e.keyCode === 38) {
-        setPistol((prev) => prev - 2);
-        setLaser((prev) => prev - 2);
+        setDirectionGun((prev) => prev - 1);
       }
       if (e.which === 40 || e.keyCode === 40) {
-        setPistol((prev) => prev + 2);
-        setLaser((prev) => prev + 2);
+        setDirectionGun((prev) => prev + 1);
       }
     }
 
@@ -61,14 +58,9 @@ const Hero = () => {
           width="40" height="50"
           stroke="black" fill="black" strokeWidth="5"
         />
-        <rect 
-          x={positionX + 25} y={`${positionY + 1}%`}
-          rx="50%" ry="50%"
-          width="6" height="6" fill="white"
-        />
         <Pistol
           x={positionX} y={positionY}
-          pistol={positionPistol} laser={positionLaser}
+          directionGun={directionGun}
         />
       </g>
     );
