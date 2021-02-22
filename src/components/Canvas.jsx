@@ -10,8 +10,8 @@ const Canvas = () => {
 
   return (
     <svg id="canvas" style={style} viewBox={viewBox}>
-      <Hero />
       <Ground />
+      <Hero />
     </svg>
   );
 };
