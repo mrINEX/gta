@@ -39,6 +39,8 @@ const Hero = () => {
       }
       if (e.which === 38 || e.keyCode === 38) {
         setDirectionGun((prev) => prev - 1);
+        // const domRect = document.querySelector('.real-pistol').getBoundingClientRect();
+        // console.log(domRect);
       }
       if (e.which === 40 || e.keyCode === 40) {
         setDirectionGun((prev) => prev + 1);
