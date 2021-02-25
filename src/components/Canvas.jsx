@@ -5,6 +5,7 @@ import Ground from './Ground';
 const Canvas = () => {
   const style = {
     border: '1px solid black',
+    position: "absolute"
   };
   const style2 = {
     border: "1px solid gold",

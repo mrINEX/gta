@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';// schemeePistol
+import SCHEMES from '../../constants/constants';
 
 const Pistol = (props) => {
   const { x, y, directionGun, isPressTrigger } = props;
-  const path = "78% 21%, 78% 27%, 75% 34%, 31% 32%, 30% 36%, 26% 36%, 23% 47%, 24% 52%, 12% 51%, 15% 46%, 18% 32%, 15% 30%, 11% 28%, 8% 29%, 15% 22%, 15% 19%, 13% 16%, 18% 18%, 20% 20%, 22% 19%, 22% 21%".replace(/%/g, '');
+  const path = SCHEMES.schemeePistol.replace(/%/g, '');
 
   if (isPressTrigger) {
     const laser = document.querySelector('.real-laser');
@@ -13,16 +14,37 @@ const Pistol = (props) => {
     const { x, bottom } = rect; // start laser
 
     const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const diagonalLength = Math.sqrt(Math.pow(window.innerWidth, 2) + Math.pow(window.innerHeight, 2));
 
-    if (canvas.getContext) {
-      const ctx = canvas.getContext('2d');
-      
+    function clear() {
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+    }
+
+    let offset = 0;
+    let timeoutId;
+
+    function draw() {
+      clear();
+      ctx.setLineDash([8, diagonalLength]);
+      ctx.lineDashOffset = -offset;
       ctx.beginPath();
       ctx.lineWidth = 3;
       ctx.moveTo(x, bottom);
-      ctx.lineTo(x + 10, bottom);
+      ctx.lineTo(right, y);
       ctx.stroke();
     }
+
+    function shot() {
+      offset += 10;
+      console.log('offset:', offset, offset > diagonalLength);
+      draw();
+      timeoutId = window.setTimeout(shot, 5);
+      if (offset > diagonalLength) window.clearTimeout(timeoutId);
+    }
+
+    shot();
   }
   
   return (
