@@ -5,6 +5,7 @@ const Hero = () => {
     const [positionX, setPositionX] = useState(60);
     const [positionY, setPositionY] = useState(82);
     const [isJump, setIsJump] = useState(false);
+    const [isPressTrigger, setIsPressTrigger] = useState(false);
 
     const [directionGun, setDirectionGun] = useState(0);
 
@@ -39,11 +40,14 @@ const Hero = () => {
       }
       if (e.which === 38 || e.keyCode === 38) {
         setDirectionGun((prev) => prev - 1);
-        // const domRect = document.querySelector('.real-pistol').getBoundingClientRect();
-        // console.log(domRect);
       }
       if (e.which === 40 || e.keyCode === 40) {
         setDirectionGun((prev) => prev + 1);
+      }
+
+      if (e.which === 69 || e.keyCode === 69) {
+        setIsPressTrigger(true);
+        setTimeout(() => setIsPressTrigger(false));
       }
     }
 
@@ -63,6 +67,7 @@ const Hero = () => {
         <Pistol
           x={positionX} y={positionY}
           directionGun={directionGun}
+          isPressTrigger={isPressTrigger}
         />
       </g>
     );
