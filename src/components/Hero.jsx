@@ -3,7 +3,7 @@ import Pistol from './guns/Pistol';
 
 const Hero = () => {
     const [positionX, setPositionX] = useState(60);
-    const [positionY, setPositionY] = useState(82);
+    const [positionY, setPositionY] = useState(window.innerHeight - 150);
     const [isJump, setIsJump] = useState(false);
     const [isPressTrigger, setIsPressTrigger] = useState(false);
 
@@ -20,6 +20,7 @@ const Hero = () => {
 
     const moveHandler = (e) => {
       e.preventDefault();
+      console.log(e);
 
       if (e.which === 39 || e.keyCode === 39) {
         setPositionX((prev) => prev + 2);
@@ -59,10 +60,10 @@ const Hero = () => {
     return (
       <g>
         <rect
-          x={positionX} y={`${positionY}%`}
+          x={positionX} y={positionY}
           rx="15" ry="15"
           width="40" height="50"
-          stroke="black" fill="black" strokeWidth="5"
+          stroke="#b33333" fill="#b33333" strokeWidth="5"
         />
         <Pistol
           x={positionX} y={positionY}

@@ -16,7 +16,7 @@ const Pistol = (props) => {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     const diagonalLength = Math.sqrt(Math.pow(window.innerWidth, 2) + Math.pow(window.innerHeight, 2));
-
+    
     function clear() {
       ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
       ctx.fillRect(0,0,canvas.width,canvas.height);
@@ -62,8 +62,8 @@ const Pistol = (props) => {
         </g>
       </defs>
 
-      <use className="real-laser" x={x + 10} y={`${y}%`} xlinkHref="#laser"/>
-      <use className="real-pistol" x={x + 10} y={`${y}%`} xlinkHref="#pistol"/>
+      <use className="real-laser" x={x + 10} y={y} xlinkHref="#laser"/>
+      <use className="real-pistol" x={x + 10} y={y} xlinkHref="#pistol"/>
     </>
   );
 }
