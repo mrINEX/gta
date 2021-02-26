@@ -1,4 +1,4 @@
-import React, { useState } from 'react';// schemeePistol
+import React from 'react';
 import SCHEMES from '../../constants/constants';
 
 const Pistol = (props) => {
@@ -30,18 +30,19 @@ const Pistol = (props) => {
       ctx.setLineDash([8, diagonalLength]);
       ctx.lineDashOffset = -offset;
       ctx.beginPath();
-      ctx.lineWidth = 3;
+      ctx.lineWidth = 4;
       ctx.moveTo(x, bottom);
       ctx.lineTo(right, y);
       ctx.stroke();
     }
 
     function shot() {
-      offset += 10;
-      console.log('offset:', offset, offset > diagonalLength);
-      draw();
-      timeoutId = window.setTimeout(shot, 5);
-      if (offset > diagonalLength) window.clearTimeout(timeoutId);
+      if (offset >= diagonalLength) window.clearTimeout(timeoutId)
+      else {
+        offset += 30;
+        timeoutId = window.setTimeout(shot, 5);
+        draw();
+      }
     }
 
     shot();
