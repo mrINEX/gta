@@ -12,7 +12,7 @@ const Hero = () => {
     const fromAbove = () => {
       for (let i = 0; i < 20; i += 1) {
         setTimeout(() => {
-          setPositionY((prev) => prev + 1);
+          setPositionY((prev) => prev + 5);
           if (i === 19) setIsJump(false);
         }, i * 6);
       }
@@ -22,17 +22,17 @@ const Hero = () => {
       e.preventDefault();
       console.log(e);
 
-      if (e.which === 39 || e.keyCode === 39) {
+      if (e.which === 39 || e.keyCode === 39 || e.which === 68 || e.keyCode === 68) {
         setPositionX((prev) => prev + 2);
       }
-      if (e.which === 37 || e.keyCode === 37) {
+      if (e.which === 37 || e.keyCode === 37 || e.which === 65 || e.keyCode === 65) {
         setPositionX((prev) => prev - 2);
       }
       if (e.which === 32 || e.keyCode === 32) {
         if (!isJump) {
           for (let i = 0; i < 20; i += 1) {
             setTimeout(() => {
-              setPositionY((prev) => prev - 1);
+              setPositionY((prev) => prev - 5);
               if (i === 19) fromAbove();
             }, i * 8);
           }
@@ -58,7 +58,7 @@ const Hero = () => {
     });
 
     return (
-      <g>
+      <>
         <rect
           x={positionX} y={positionY}
           rx="15" ry="15"
@@ -70,7 +70,7 @@ const Hero = () => {
           directionGun={directionGun}
           isPressTrigger={isPressTrigger}
         />
-      </g>
+      </>
     );
 }
 
