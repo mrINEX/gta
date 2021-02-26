@@ -13,46 +13,9 @@ const Canvas = () => {
     const canvas = document.getElementById('shut-gun-canvas');
 
     if (canvas.getContext) {
-      const ctx = canvas.getContext('2d');
-
-      ctx.beginPath();
-      ctx.strokeStyle = 'black';
-      ctx.moveTo(0, window.innerHeight - 200);
-      ctx.lineTo(window.innerWidth, window.innerHeight - 200);
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.strokeStyle = 'black';
-      path.forEach((el, i) => {
-        if (i % 2) {
-          ctx.lineTo(path[i - 1], el.replace(',', ''));
-        }
-      });
-      ctx.closePath();
-      ctx.lineWidth = 3;
-      ctx.stroke();
-      ctx.fillStyle = '#607d8b';
-      ctx.fill();
+      
     }
   });
-
-  const removeGun = () => {
-    const canvas = document.getElementById('shut-gun-canvas');
-    const ctx = canvas.getContext('2d');
-
-    ctx.beginPath();
-      ctx.strokeStyle = 'white';
-      path.forEach((el, i) => {
-        if (i % 2) {
-          ctx.lineTo(path[i - 1], el.replace(',', ''));
-        }
-      });
-      ctx.closePath();
-      ctx.lineWidth = 5;
-      ctx.stroke();
-      ctx.fillStyle = 'white';
-      ctx.fill();
-  }
 
   return (
     <>
@@ -64,10 +27,6 @@ const Canvas = () => {
       <svg id="shut-gun-canvas" style={style} viewBox={viewBox}>
         <Ground />
         <Hero />
-        {/* <g>
-          <circle cx="10" cy="10" r="10" fill="blue"></circle>
-          <animateMotion path="M 0 0 V 130 H 280 Z" dur="4s" repeatCount="indefinite" />
-        </g> */}
       </svg>
     </>
   );
