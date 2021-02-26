@@ -1,23 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import SCHEMES from '../../constants/constants';
 
 const Pistol = (props) => {
-  const { x, y, directionGun } = props;
-  const path = "78% 21%, 78% 27%, 75% 34%, 31% 32%, 30% 36%, 26% 36%, 23% 47%, 24% 52%, 12% 51%, 15% 46%, 18% 32%, 15% 30%, 11% 28%, 8% 29%, 15% 22%, 15% 19%, 13% 16%, 18% 18%, 20% 20%, 22% 19%, 22% 19%".replace(/%/g, '');
-  
-  return (
-    <>
-      <defs>
-        <g id="pistol" transform={`rotate(${directionGun})`}>
-          <line x1="75" x2="100%" y1="26" y2="82" stroke="red" strokeWidth="1.6" strokeLinecap="round"/>
-          <polygon
-            points={path} stroke="black" strokeWidth="2"
-            fill="#607d8b"
-          />
-        </g>
-      </defs>
+  const { x, y, directionGun, isPressTrigger } = props;
+  const path = SCHEMES.schemeePistol.replace(/%/g, '').split(' ');
 
-      <use className="real-pistol" x={x + 10} y={`${y}%`} xlinkHref="#pistol"/>
-    </>
+  useEffect(() => {
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    ctx.arc(x, y, 2, 0, 2 * Math.PI);
+    ctx.fill();
+
+    ctx.translate(x, y);
+    SCHEMES.drawPistol(ctx, path);
+  });
+
+  if (isPressTrigger) {
+    const diagonalLength = Math.sqrt(Math.pow(window.innerWidth, 2) + Math.pow(window.innerHeight, 2));
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    SCHEMES.removePistol(ctx, path);
+    ctx.rotate((Math.PI / 180) * -10);
+    SCHEMES.drawPistol(ctx, path);
+  }
+
+  return (
+    <div></div>
   );
 }
 
