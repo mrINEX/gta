@@ -19,8 +19,7 @@ const Hero = () => {
     }
 
     const moveHandler = (e) => {
-      e.preventDefault();
-      console.log(e);
+      // e.preventDefault();
 
       if (e.which === 39 || e.keyCode === 39 || e.which === 68 || e.keyCode === 68) {
         setPositionX((prev) => prev + 2);
