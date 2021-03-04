@@ -15,7 +15,7 @@ const Canvas = () => {
 
   return (
     <>
-      <canvas id="canvas" style={style2} width={window.innerWidth} height={window.innerHeight}></canvas>
+      <canvas id="canvas-bullet" style={style2} width={window.innerWidth} height={window.innerHeight}></canvas>
       <svg id="svg-canvas" style={style} viewBox={viewBox}>
         <Ground />
         <Hero />
