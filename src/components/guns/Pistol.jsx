@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import SCHEMES from '../../constants/constants';
 import Enemy from '../Enemy';
+import shot from '../../assets/sounds/16557_1460656892.mp3'
 
 const Pistol = (props) => {
-  const { x, y, weaponDirection, isPressTrigger, isLaser } = props;
+  const { x, y, weaponDirection, isPressTrigger, isLaser, isSound } = props;
   const path = SCHEMES.schemePistol3.replace(/%/g, '');
   const [enemyIsAlive, setEnemyIsAlive] = useState(0);
 
   if (isPressTrigger) {
+    isSound && new Audio(shot).play();
     const canvasBullet = document.getElementById('canvas-bullet');
     const ctx = canvasBullet.getContext('2d');
     const canvasEnemy = document.getElementById('canvas-enemy');
@@ -88,6 +90,7 @@ const Pistol = (props) => {
       </g>
       <Enemy
         enemyIsAlive={enemyIsAlive}
+        xHero={x + 10} yHero={y + 10}
       />
     </>
   );
