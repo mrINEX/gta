@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Pistol from './guns/Pistol';
+import Enemy from './Enemy';
 
 const Hero = () => {
     const [positionX, setPositionX] = useState(60);
@@ -7,7 +8,7 @@ const Hero = () => {
     const [isJump, setIsJump] = useState(false);
     const [isPressTrigger, setIsPressTrigger] = useState(false);
 
-    const [directionGun, setDirectionGun] = useState(0);
+    const [weaponDirection, setWeaponDirection] = useState(0);
 
     const fromAbove = () => {
       for (let i = 0; i < 20; i += 1) {
@@ -39,10 +40,10 @@ const Hero = () => {
         setIsJump(true);
       }
       if (e.which === 38 || e.keyCode === 38) {
-        setDirectionGun((prev) => prev - 1);
+        setWeaponDirection((prev) => prev - 1);
       }
       if (e.which === 40 || e.keyCode === 40) {
-        setDirectionGun((prev) => prev + 1);
+        setWeaponDirection((prev) => prev + 1);
       }
 
       if (e.which === 69 || e.keyCode === 69) {
@@ -66,9 +67,11 @@ const Hero = () => {
         />
         <Pistol
           x={positionX} y={positionY}
-          directionGun={directionGun}
+          weaponDirection={weaponDirection}
           isPressTrigger={isPressTrigger}
+          setIsPressTrigger={setIsPressTrigger}
         />
+        <Enemy />
       </>
     );
 }
