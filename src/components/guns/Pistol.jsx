@@ -2,7 +2,7 @@ import React from 'react';
 import SCHEMES from '../../constants/constants';
 
 const Pistol = (props) => {
-  const { x, y, weaponDirection, isPressTrigger } = props;
+  const { x, y, weaponDirection, isPressTrigger, isLaser } = props;
   const path = SCHEMES.schemePistol3.replace(/%/g, '');
 
   if (isPressTrigger) {
@@ -49,7 +49,6 @@ const Pistol = (props) => {
       if (bullet.radius > diagonalLength) {
         window.cancelAnimationFrame(ref);
         bullet.radius = 82;
-        console.log(bullet.result.isHit);
         if (bullet.result.isHit) {
           ctxEnemy.clearRect(0,0, canvasEnemy.width, canvasEnemy.height);
         }
@@ -75,9 +74,9 @@ const Pistol = (props) => {
   
   return (
     <g transform={`translate(${x + 10}, ${y + 10}) rotate(${weaponDirection})`}>
-      {/* <polyline id="laser"
+      {isLaser && <polyline id="laser"
         points={`82,0 ${Math.sqrt(Math.pow(window.innerWidth, 2) + Math.pow(window.innerHeight, 2))},0`}
-        stroke="red" strokeWidth="1.6" strokeLinecap="round"/> */}
+        stroke="red" strokeWidth="1.6" strokeLinecap="round"/>}
       <polygon id="pistol"
         points={path} stroke="black" strokeWidth="2"
         fill="#607d8b"

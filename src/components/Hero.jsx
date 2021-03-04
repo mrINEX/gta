@@ -7,6 +7,7 @@ const Hero = () => {
     const [positionY, setPositionY] = useState(window.innerHeight - 150);
     const [isJump, setIsJump] = useState(false);
     const [isPressTrigger, setIsPressTrigger] = useState(false);
+    const [isLaser, setIsLaser] = useState(false);
 
     const [weaponDirection, setWeaponDirection] = useState(0);
 
@@ -20,8 +21,6 @@ const Hero = () => {
     }
 
     const moveHandler = (e) => {
-      // e.preventDefault();
-
       if (e.which === 39 || e.keyCode === 39 || e.which === 68 || e.keyCode === 68) {
         setPositionX((prev) => prev + 2);
       }
@@ -50,6 +49,15 @@ const Hero = () => {
         setIsPressTrigger(true);
         setTimeout(() => setIsPressTrigger(false));
       }
+
+      if (e.which === 76 || e.keyCode === 76) {
+        setIsLaser((prev) => {
+          if (prev) {
+            return false;
+          }
+          return true;
+        });
+      }
     }
 
     useEffect(() => {
@@ -69,6 +77,7 @@ const Hero = () => {
           x={positionX} y={positionY}
           weaponDirection={weaponDirection}
           isPressTrigger={isPressTrigger}
+          isLaser={isLaser}
           setIsPressTrigger={setIsPressTrigger}
         />
         <Enemy />

@@ -11,7 +11,6 @@ const Enemy = () => {
 
   return (
     <div></div>
-    // <circle cx={window.innerWidth - 150} cy={window.innerHeight - 150} r="50"/>
   );
 };
 
