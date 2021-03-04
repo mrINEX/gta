@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Pistol from './guns/Pistol';
-import Enemy from './Enemy';
 
 const Hero = () => {
     const [positionX, setPositionX] = useState(60);
@@ -80,7 +79,6 @@ const Hero = () => {
           isLaser={isLaser}
           setIsPressTrigger={setIsPressTrigger}
         />
-        <Enemy />
       </>
     );
 }

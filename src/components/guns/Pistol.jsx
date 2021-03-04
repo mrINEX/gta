@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SCHEMES from '../../constants/constants';
+import Enemy from '../Enemy';
 
 const Pistol = (props) => {
   const { x, y, weaponDirection, isPressTrigger, isLaser } = props;
   const path = SCHEMES.schemePistol3.replace(/%/g, '');
+  const [enemyIsAlive, setEnemyIsAlive] = useState(0);
 
   if (isPressTrigger) {
     const canvasBullet = document.getElementById('canvas-bullet');
@@ -47,10 +49,11 @@ const Pistol = (props) => {
       ctx.clearRect(0,0, canvasBullet.width, canvasBullet.height);
 
       if (bullet.radius > diagonalLength) {
-        window.cancelAnimationFrame(ref);
         bullet.radius = 82;
+        window.cancelAnimationFrame(ref);
         if (bullet.result.isHit) {
           ctxEnemy.clearRect(0,0, canvasEnemy.width, canvasEnemy.height);
+          setEnemyIsAlive(prev => prev + 1)
         }
       } else {
         bullet.draw();
@@ -73,15 +76,20 @@ const Pistol = (props) => {
   }
   
   return (
-    <g transform={`translate(${x + 10}, ${y + 10}) rotate(${weaponDirection})`}>
-      {isLaser && <polyline id="laser"
-        points={`82,0 ${Math.sqrt(Math.pow(window.innerWidth, 2) + Math.pow(window.innerHeight, 2))},0`}
-        stroke="red" strokeWidth="1.6" strokeLinecap="round"/>}
-      <polygon id="pistol"
-        points={path} stroke="black" strokeWidth="2"
-        fill="#607d8b"
+    <>
+      <g transform={`translate(${x + 10}, ${y + 10}) rotate(${weaponDirection})`}>
+        {isLaser && <polyline id="laser"
+          points={`82,0 ${Math.sqrt(Math.pow(window.innerWidth, 2) + Math.pow(window.innerHeight, 2))},0`}
+          stroke="red" strokeWidth="1.6" strokeLinecap="round"/>}
+        <polygon id="pistol"
+          points={path} stroke="black" strokeWidth="2"
+          fill="#607d8b"
+        />
+      </g>
+      <Enemy
+        enemyIsAlive={enemyIsAlive}
       />
-    </g>
+    </>
   );
 }
 
