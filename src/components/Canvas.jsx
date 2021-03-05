@@ -27,6 +27,7 @@ const Canvas = () => {
         <code className="btn-key">↑ and ↓ (weapon direction)</code>
         <code className="btn-key">L (on/off weapon laser)</code>
         <code className="btn-key">M (on/off weapon sound)</code>
+        <code className="btn-key">C (change Hero color)</code>
       </div>
 
       <canvas id="canvas-bullet" style={styleBullet} width={window.innerWidth} height={window.innerHeight}></canvas>

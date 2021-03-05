@@ -22,6 +22,7 @@ const SCHEMES = {
     ctx.fill();
     ctx.restore();
   },
+  colorsHero: ['blue', 'black', '#ff5722'],
 };
 
 export default SCHEMES;

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Pistol from './guns/Pistol';
+import SCHEMES from '../constants/constants';
 
 const Hero = () => {
     const [positionX, setPositionX] = useState(60);
     const [positionY, setPositionY] = useState(window.innerHeight - 150);
+    const [colorHero, setColorHero] = useState(0);
     const [isJump, setIsJump] = useState(false);
     const [isPressTrigger, setIsPressTrigger] = useState(false);
     const [isLaser, setIsLaser] = useState(false);
@@ -21,7 +23,7 @@ const Hero = () => {
     }
 
     const moveHandler = (e) => {
-      // console.log(e);
+      console.log(e);
       if (e.which === 39 || e.keyCode === 39 || e.which === 68 || e.keyCode === 68) {
         setPositionX((prev) => prev + 2);
       }
@@ -68,6 +70,10 @@ const Hero = () => {
           return true;
         });
       }
+
+      if (e.which === 67 || e.keyCode === 67) {
+        setColorHero((prev) => prev + 1);
+      }
     }
 
     useEffect(() => {
@@ -80,8 +86,8 @@ const Hero = () => {
         <rect
           x={positionX} y={positionY}
           rx="15" ry="15"
-          width="40" height="50"
-          stroke="#b33333" fill="#b33333" strokeWidth="5"
+          width="55" height="70"
+          fill={SCHEMES.colorsHero[colorHero % (SCHEMES.colorsHero.length + 1)]}
         />
         <Pistol
           x={positionX} y={positionY}
