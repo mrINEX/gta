@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Pistol from './guns/Pistol';
 import SCHEMES from '../constants/constants';
 
-const Hero = () => {
+const Hero = (props) => {
     const [positionX, setPositionX] = useState(60);
     const [positionY, setPositionY] = useState(window.innerHeight - 150);
     const [colorHero, setColorHero] = useState(0);
@@ -95,6 +95,7 @@ const Hero = () => {
           isPressTrigger={isPressTrigger}
           isLaser={isLaser}
           isSound={isSound}
+          skin={props.skin}
           setIsPressTrigger={setIsPressTrigger}
         />
       </>

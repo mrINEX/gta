@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import SCHEMES from '../../constants/constants';
 import Enemy from '../Enemy';
 import shot from '../../assets/sounds/16557_1460656892.mp3'
 
 const Pistol = (props) => {
-  const { x, y, weaponDirection, isPressTrigger, isLaser, isSound } = props;
-  const path = SCHEMES.schemePistol3.replace(/%/g, '');
+  const { x, y, weaponDirection, isPressTrigger, isLaser, isSound, skin } = props;
+  const path = skin.replace(/%/g, '');
   const [enemyIsAlive, setEnemyIsAlive] = useState(0);
 
   if (isPressTrigger) {
