@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Hero from './Hero';
 import Ground from './Ground';
 import SCHEMES from '../constants/constants';
+import music from '../assets/sounds/Ep01-World.mp3';
 import './scss/Canvas.scss';
 
 const Canvas = () => {
   const [skin, setSkin] = useState(SCHEMES.schemePistol);
+  const audio = useMemo(() => new Audio(music), []);
+  const [volume, setVolume] = useState(0.1);
+
+  useEffect(() => {
+    audio.volume = volume;
+  });
 
   const style = {
     border: '1px solid black',
@@ -22,6 +29,19 @@ const Canvas = () => {
   };
   const viewBox = [0, 0, window.innerWidth, window.innerHeight];
 
+  function handleClick() {
+    const isPlay = !!(audio.currentTime > 0 && !audio.paused && !audio.ended && audio.readyState > 2);
+    if (isPlay) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+  }
+
+  function changeVolume(e) {
+    setVolume(`0.${e.target.value}`);
+  }
+
   function changeSkin(e) {
     const { value } = e.target;
     setSkin(SCHEMES[value]);
@@ -36,6 +56,13 @@ const Canvas = () => {
         <code className="btn-key">L (on/off weapon laser)</code>
         <code className="btn-key">M (on/off weapon sound)</code>
         <code className="btn-key">C (change Hero color)</code>
+        <div className="btn-key">
+          <code className="music" onClick={handleClick}>Click here (on/off sound)</code>
+          <input
+            onChange={changeVolume} type="range"
+            value={+String(volume).substring(2, 3)} min="0" max="9"
+          />
+        </div>
         <select className="btn-key" name="select" onChange={changeSkin}>
           <option value="schemePistol">Skin weapon 1</option>
           <option value="schemePistol2">Skin weapon 2</option>
