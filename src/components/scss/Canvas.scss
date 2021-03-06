@@ -1,0 +1,19 @@
+.prompts {
+  position: absolute;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  z-index: 15;
+
+  .btn-key {
+    border: 1px solid gray;
+    border-radius: 5px;
+    background-color: burlywood;
+    margin: 1px;
+    padding: 0 3px;
+  }
+
+  .music {
+    cursor: pointer;
+  }
+}
